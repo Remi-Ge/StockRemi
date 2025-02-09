@@ -1,7 +1,7 @@
 #include "piece.h"
 
 const std::map<PieceType, PieceInfo> Piece::pieceRepresentations = {
-    {PieceType::empty, {'.', '.', L'.', L'.'}},
+    {PieceType::empty, {' ', ' ', L' ', L' '}},
     {PieceType::rook, {'R', 'r', L'♜', L'♖'}},
     {PieceType::knight, {'N', 'n', L'♞', L'♘'}},
     {PieceType::bishop, {'B', 'b', L'♝', L'♗'}},
