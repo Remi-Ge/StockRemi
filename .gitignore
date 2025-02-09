@@ -1,3 +1,6 @@
 # Compiled files
 *.o
 build
+
+# Editor files
+.vscode/
