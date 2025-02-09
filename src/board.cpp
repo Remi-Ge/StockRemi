@@ -32,6 +32,10 @@ void Board::importFen(const std::string& fen) {
 }
 
 void Board::showBoard() {
+    for (int x = 0; x < 8; x++) {
+        std::cout << "  " << static_cast<char>('a' + x) << ' ';
+    }
+    std::cout << std::endl;
     for (int y = 0; y < 8; y++) {
         std::cout << "+---+---+---+---+---+---+---+---+" << std::endl;
         for (int x = 0; x < 8; x++) {
@@ -39,7 +43,7 @@ void Board::showBoard() {
             Piece p(position[index]);
             std::cout << "| " << p.getNotation() << ' ';
         }
-        std::cout << '|' << std::endl;
+        std::cout << "| " << std::abs(y - 8) << std::endl;
     }
     std::cout << "+---+---+---+---+---+---+---+---+" << std::endl;
 }
