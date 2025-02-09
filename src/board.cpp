@@ -14,7 +14,13 @@ Board::Board(const std::string& fen) {
 void Board::importFen(const std::string& fen) {
     std::istringstream fenStream(fen);
     std::string boardPart;
-    fenStream >> boardPart;
+    std::string turnPart;
+    std::string castlePart;
+    std::string enPassantPart;
+    std::string halfMovesPart;
+    std::string totalMovesPart;
+
+    fenStream >> boardPart >> turnPart >> castlePart >> enPassantPart >> halfMovesPart >> totalMovesPart;
 
     int index = 0;
     for (char c : boardPart) {
@@ -29,9 +35,12 @@ void Board::importFen(const std::string& fen) {
             index++;
         }
     }
+
+    this->isWhiteTurn = (turnPart == "w");
 }
 
 void Board::showBoard() {
+    std::cout << (this->isWhiteTurn ? "White to play" : "Black to play") << std::endl;
     for (int x = 0; x < 8; x++) {
         std::cout << "  " << static_cast<char>('a' + x) << ' ';
     }
