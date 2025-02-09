@@ -18,6 +18,10 @@ $(EXEC): $(OBJ)
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
+# Run the build
+run: $(EXEC)
+	./$(EXEC)
+
 # Clean up compiled files
 clean:
 	rm -f $(OBJ) $(EXEC)
