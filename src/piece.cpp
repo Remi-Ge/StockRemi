@@ -11,22 +11,33 @@ const std::map<PieceType, PieceInfo> Piece::pieceRepresentations = {
 };
 
 Piece::Piece(u_int8_t id) {
-    isWhite = (id & 0b1000) == 0;
-    type = static_cast<PieceType>(id & 0b0111);
+    this->id = id;
+    this->isWhite = (id & 0b1000) == 0;
+    this->type = static_cast<PieceType>(id & 0b0111);
+}
+
+Piece::Piece(char notation) {
+    for (const auto& [type, info] : pieceRepresentations) {
+        if (notation == info.whiteNotation) {
+            this->isWhite = true;
+            this->type = type;
+            break;
+        }
+        if (notation == info.blackNotation) {
+            this->isWhite = false;
+            this->type = type;
+            break;
+        }
+    }
+    this->id = (isWhite ? 0 : 0b1000) | (static_cast<u_int8_t>(type) & 0b0111);
 }
 
 char Piece::getNotation() {
-    PieceInfo info = pieceRepresentations.at(type);
-    if (isWhite) {
-        return info.whiteNotation;
-    }
-    return info.blackNotation;
+    PieceInfo info = pieceRepresentations.at(this->type);
+    return this->isWhite ? info.whiteNotation : info.blackNotation;
 }
 
 wchar_t Piece::getSymbol() {
-    PieceInfo info = pieceRepresentations.at(type);
-    if (isWhite) {
-        return info.whiteSymbol;
-    }
-    return info.blackSymbol;
+    PieceInfo info = pieceRepresentations.at(this->type);
+    return this->isWhite ? info.whiteSymbol : info.blackSymbol;
 }

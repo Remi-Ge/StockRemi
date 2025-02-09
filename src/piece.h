@@ -26,6 +26,8 @@ private:
     static const std::map<PieceType, PieceInfo> pieceRepresentations;
 public:
     Piece(u_int8_t id);
+    Piece(char notation);
+    u_int8_t id;
     PieceType type;
     bool isWhite;
     char getNotation();
