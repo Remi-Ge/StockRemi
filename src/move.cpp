@@ -23,6 +23,15 @@ const std::map<PieceType, std::vector<PieceMovements>> Move::PIECE_MOVEMENTS = {
     }},
 };
 
+std::string Move::getNotation() {
+    char startFile = 'a' + (startSquare % 8);
+    char startRank = '1' + (7 - (startSquare / 8));
+    char targetFile = 'a' + (targetSquare % 8);
+    char targetRank = '1' + (7 - (targetSquare / 8));
+
+    return std::string() + startFile + startRank + targetFile + targetRank;
+}
+
 bool Move::isInBoard(u_int8_t start, Direction direction) {
     int8_t targetLine = (start / 8) + (direction.second);
     int8_t targetCol = (start % 8) + (direction.first);

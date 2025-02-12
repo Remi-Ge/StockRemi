@@ -23,6 +23,7 @@ public:
     Move(u_int8_t startSquare, u_int8_t targetSquare);
     u_int8_t startSquare;
     u_int8_t targetSquare;
+    std::string getNotation();
 
     static std::vector<Move> getMoves(BoardState& state);
 };
