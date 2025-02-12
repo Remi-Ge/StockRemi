@@ -1,13 +1,13 @@
 #include "piece.h"
 
 const std::map<PieceType, PieceInfo> Piece::pieceRepresentations = {
-    {PieceType::empty, {' ', ' ', L' ', L' '}},
-    {PieceType::rook, {'R', 'r', L'♜', L'♖'}},
-    {PieceType::knight, {'N', 'n', L'♞', L'♘'}},
-    {PieceType::bishop, {'B', 'b', L'♝', L'♗'}},
-    {PieceType::queen, {'Q', 'q', L'♛', L'♕'}},
-    {PieceType::king, {'K', 'k', L'♚', L'♔'}},
-    {PieceType::pawn, {'P', 'p', L'♟', L'♙'}},
+    {PieceType::empty, {' ', ' ', "Empty"}},
+    {PieceType::rook, {'R', 'r', "Rook"}},
+    {PieceType::knight, {'N', 'n', "Knight"}},
+    {PieceType::bishop, {'B', 'b', "Bishop"}},
+    {PieceType::queen, {'Q', 'q', "Queen"}},
+    {PieceType::king, {'K', 'k', "King"}},
+    {PieceType::pawn, {'P', 'p', "Pawn"}},
 };
 
 Piece::Piece(u_int8_t id) {
@@ -35,9 +35,4 @@ Piece::Piece(char notation) {
 char Piece::getNotation() {
     PieceInfo info = pieceRepresentations.at(this->type);
     return this->isWhite ? info.whiteNotation : info.blackNotation;
-}
-
-wchar_t Piece::getSymbol() {
-    PieceInfo info = pieceRepresentations.at(this->type);
-    return this->isWhite ? info.whiteSymbol : info.blackSymbol;
 }

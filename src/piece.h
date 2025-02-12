@@ -17,8 +17,7 @@ enum class PieceType {
 struct PieceInfo {
     char whiteNotation;
     char blackNotation;
-    wchar_t whiteSymbol;
-    wchar_t blackSymbol;
+    std::string name;
 };
 
 class Piece {
@@ -31,7 +30,6 @@ public:
     PieceType type;
     bool isWhite;
     char getNotation();
-    wchar_t getSymbol();
 };
 
 #endif
