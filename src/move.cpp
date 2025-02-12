@@ -1,4 +1,5 @@
 #include "move.h"
+#include "board.h"
 
 Move::Move(u_int8_t startSquare, u_int8_t targetSquare) {
     this->startSquare = startSquare;
@@ -21,3 +22,9 @@ const std::map<PieceType, std::vector<PieceMovements>> Move::PIECE_MOVEMENTS = {
         PieceMovements{{{-1, -1}, {1, -1}}, true, true, 1}  // Takes
     }},
 };
+
+bool Move::isInBoard(u_int8_t start, Direction direction) {
+    int8_t targetLine = (start / 8) + (direction.second);
+    int8_t targetCol = (start % 8) + (direction.first);
+    return targetLine >= 0 && targetLine <= 7 && targetCol >= 0 && targetCol <= 7;
+}

@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <array>
+#include "move.h"
 
 class Board {
 private:
