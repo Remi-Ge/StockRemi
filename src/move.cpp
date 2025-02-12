@@ -48,11 +48,13 @@ std::vector<Move> Move::getMoves(BoardState& state) {
                     u_int8_t targetSquare = i + totalDirection.first + totalDirection.second * 8;
                     Piece targetSquarePiece = Piece(state.position[targetSquare]);
 
-                    if ((targetSquarePiece.type != PieceType::empty 
+                    if (targetSquarePiece.type != PieceType::empty 
                             && targetSquarePiece.isWhite != state.isWhiteTurn
-                            && p_moves.canCapture)
-                            || (targetSquarePiece.type == PieceType::empty
-                            && !p_moves.mustCapture)) {
+                            && p_moves.canCapture) { // capture
+                        moves.push_back(Move(i, targetSquare));
+                        break;
+                    } else if (targetSquarePiece.type == PieceType::empty
+                            && !p_moves.mustCapture) { // not capture
                         moves.push_back(Move(i, targetSquare));
                     } else {
                         break;
