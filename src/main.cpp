@@ -8,7 +8,8 @@ int main() {
     Board board;
     board.showBoard();
 
-    Move::getMoves(board.state);
+    std::cout << Move::getMoves(board.state).size() << " moves" << std::endl;
+
 
     return 0;
 }

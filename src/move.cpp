@@ -32,7 +32,35 @@ bool Move::isInBoard(u_int8_t start, Direction direction) {
 std::vector<Move> Move::getMoves(BoardState& state) {
     std::vector<Move> moves;
 
-    std::cout << "Calculating moves..." << std::endl;
+    for (size_t i = 0; i < state.position.size(); ++i) {
+        Piece p = Piece(state.position[i]);
+        if (p.type == PieceType::empty || p.isWhite != state.isWhiteTurn) {
+            continue;
+        }
+        for (PieceMovements p_moves: PIECE_MOVEMENTS.at(p.type)) {
+            for (Direction direction: p_moves.directions) {
+                for (int distance = 1; distance <= p_moves.maxDistance; distance++) {
+                    Direction totalDirection = {direction.first * distance
+                            , direction.second * distance * (state.isWhiteTurn ? 1 : -1)};
+                    if (!Move::isInBoard(i, totalDirection)) {
+                        break;
+                    }
+                    u_int8_t targetSquare = i + totalDirection.first + totalDirection.second * 8;
+                    Piece targetSquarePiece = Piece(state.position[targetSquare]);
+
+                    if ((targetSquarePiece.type != PieceType::empty 
+                            && targetSquarePiece.isWhite != state.isWhiteTurn
+                            && p_moves.canCapture)
+                            || (targetSquarePiece.type == PieceType::empty
+                            && !p_moves.mustCapture)) {
+                        moves.push_back(Move(i, targetSquare));
+                    } else {
+                        break;
+                    }
+                }
+            }
+        }
+    }
 
     return moves;
 }
