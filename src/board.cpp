@@ -28,19 +28,19 @@ void Board::importFen(const std::string& fen) {
             continue;
         } else if (std::isdigit(c)) {
             for (int i = 0; i < c - '0'; i++) {
-                position[index++] = Piece(' ').id;
+                state.position[index++] = Piece(' ').id;
             }            
         } else {
-            this->position[index] = Piece(c).id;
+            this->state.position[index] = Piece(c).id;
             index++;
         }
     }
 
-    this->isWhiteTurn = (turnPart == "w");
+    this->state.isWhiteTurn = (turnPart == "w");
 }
 
 void Board::showBoard() {
-    std::cout << (this->isWhiteTurn ? "White to play" : "Black to play") << std::endl;
+    std::cout << (this->state.isWhiteTurn ? "White to play" : "Black to play") << std::endl;
     for (int x = 0; x < 8; x++) {
         std::cout << "  " << static_cast<char>('a' + x) << ' ';
     }
@@ -49,7 +49,7 @@ void Board::showBoard() {
         std::cout << "+---+---+---+---+---+---+---+---+" << std::endl;
         for (int x = 0; x < 8; x++) {
             int index = y * 8 + x;
-            Piece p(position[index]);
+            Piece p(state.position[index]);
             std::cout << "| " << p.getNotation() << ' ';
         }
         std::cout << "| " << std::abs(y - 8) << std::endl;
