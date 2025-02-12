@@ -28,3 +28,11 @@ bool Move::isInBoard(u_int8_t start, Direction direction) {
     int8_t targetCol = (start % 8) + (direction.first);
     return targetLine >= 0 && targetLine <= 7 && targetCol >= 0 && targetCol <= 7;
 }
+
+std::vector<Move> Move::getMoves(BoardState& state) {
+    std::vector<Move> moves;
+
+    std::cout << "Calculating moves..." << std::endl;
+
+    return moves;
+}

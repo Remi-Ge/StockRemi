@@ -1,5 +1,5 @@
-#ifndef BOARD_H
-#define BOARD_H
+#ifndef MOVE_H
+#define MOVE_H
 
 #include <iostream>
 #include <vector>
@@ -23,6 +23,8 @@ public:
     Move(u_int8_t startSquare, u_int8_t targetSquare);
     u_int8_t startSquare;
     u_int8_t targetSquare;
+
+    static std::vector<Move> getMoves(BoardState& state);
 };
 
 #endif
